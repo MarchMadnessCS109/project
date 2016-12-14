@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Data Driven March Madness: The Search for the Perfect Bracket by MarchMadnessCS109</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Data Driven March Madness: The Search for the Perfect Bracket</h1>
+        <p>Isabel Lee and Christina Tenuta</p>
+
+        <p class="view"><a href="https://github.com/MarchMadnessCS109/project">View the Project on GitHub <small>MarchMadnessCS109/project</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/MarchMadnessCS109/project/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/MarchMadnessCS109/project/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/MarchMadnessCS109/project">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="notebook-contents" class="anchor" href="#notebook-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notebook Contents</h2>
+
+<p><a href="#0">0 Introduction</a></p>
+
+<p><a href="#1">1 Data Exploration</a></p>
+
+<p><a href="#2">2 Building the Model</a></p>
+
+<ul>
+<li><a href="#2.1">2.1 Methodology</a></li>
+</ul>
+
+<p><a href="#3">3 Final Model and Prediction</a></p>
+
+<h1>
+<a id="0-introduction" class="anchor" href="#0-introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0 Introduction</h1>
+
+<p><a id="0"></a></p>
+
+<h2>
+<a id="background-and-motivation" class="anchor" href="#background-and-motivation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background and Motivation</h2>
+
+<p>March Madness has become one of the most popular sporting events in the United States. It has been estimated that millions of Americans participate in bracket tournaments every year. ESPN, CBS Sports, and Fox Sports host tournaments every year. </p>
+
+<p>In 2014, Warren Buffet offered a billion dollars to anyone who could predict a perfect bracket, and not a single person was able to. March Madness has become a lucrative way of gambling in the past years. In light of the seemingly impossible perfect bracket, we aim to use data science to create an algorithm that maximizes the typical scoring mechanism in bracket tournaments to optimize chances of winning in any given bracket tournament. </p>
+
+<p>Brackets are generally scored by giving more weight to the later games. For example, every game guessed correctly is worth 1 point in the first round, 2 points in the second, 4 points in the third and so on, so forth. Thus, the final round is worth 32 points, out of a total 192 possible points. Picking the last game correctly has huge influence, as the predictor not only predicted the correct winning teams of the final 4, but also the final game, for a total 64 points, or one third of the total points overall. Consequently, the scoring mechanism places much greater importance on the later games. We would like our bracket to optimize for this scoring mechanism.</p>
+
+<p>A major challenge participants in a bracket tournament tend to face is the unpredictability of the games. Not only are the chances of predicting a fully correct bracket worse than a billion to one against, but there are factors outside of simple offensive or defensive statistics that make the feat incredibly difficult. Variables such as momentum, confidence, distance from home school, and such are qualitative statistics that can have large impacts on the outcome of games.</p>
+
+<p>Using data science, we propose the creation of a bracket using not only basketball statistics from the competing teams’ regular seasons, but also for factors less quantitative, such as momentum and confidence. </p>
+
+<h2>
+<a id="initial-questions" class="anchor" href="#initial-questions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Initial Questions</h2>
+
+<p>Initially, the goal of this project was to simply create an algorithm that would predict a March Madness bracket that produced the highest score given the tournament scoring mechanism. However, over the course of the project, more questions evolved as we began to think about how we would get to this bracket in the first place. </p>
+
+<ul>
+<li>Beyond quantitative variables, what qualitative variables drive a team’s wins?</li>
+<li>How can we use linear regression to determine one team winning over another?</li>
+<li>How do we make our model optimize for the scoring mechanism and not the accuracy?</li>
+<li>How should our train and testing data sets operate within the model?</li>
+</ul>
+
+<h1>
+<a id="2-building-the-model" class="anchor" href="#2-building-the-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 Building the Model</h1>
+
+<p><a id="2"></a></p>
+
+<p>In order to build the model, we first built the functions that we would need in order to complete all of the steps of our process. The steps are as follows:</p>
+
+<ol>
+<li>Assign feature vectors for each team in the tournament using regular season statistics</li>
+<li>Tune PCA components to account for correlation of offensive and defensive statistics</li>
+<li>Append momentum, elo score, and consistency to the vectors</li>
+<li>Train the model with 3 years of tournament data using logistic regression (tuning C) to determine probabilities of one     team winnings over another</li>
+<li>Predict probabilities of all possible games in the test year tournament using the model</li>
+<li>Build a bracket predicting the model, tuning for the range in which upsets will occur</li>
+<li>Score the bracket based on the weighted scoring mechanism, weighting variability from the seed model</li>
+</ol>
+
+<p>More detail about each of these steps is included as they are performed.</p>
+
+<h2>
+<a id="21-methodology" class="anchor" href="#21-methodology" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1 Methodology</h2>
+
+<p><a id="2.1"></a></p>
+
+<p>In this segment, we will explain the methodology behind our model, which is extremely important in building a model. First, I will address our strategy for winning a bracket tournament. This strategy is based on the idea that thousands of people compete in March Madness brackets every year. In order to win these winner-take-all style tournaments, it is important that a bracket not only score the highest, but is also the most different. Thus, our choice to tune the upset range of our model and then choose the underdog to win in this range is driven by the fact that we would like our model to be most different from the other brackets. Likewise, we include a function to account for the variance of our model from the seed model in the weighted score. In other words, brackets that are more different from the seed model earn more points because they are different. </p>
+
+<p>Secondly, I will address our choice to tune the model based on weighted score rather than accuracy of predicted games. Again, the weighted score system of March Madness brackets increases the points earned for games guessed correctly geometrically. Thus, guessing the later games correctly is much more important than say, the round of 64. Consequently, we chose to tune our model to score well rather than simply predict games well. </p>
+
+<p>Lastly, our choice to train the model using 3 years before the test year is driven by two suppositions. The first is that the game changes over the years. Teams might score more points, foul less, etc. over the course of history. To account for these changing aspects of the game, we used 3 years before the test year to train our model. Secondly, we use 3 years before the test year to avoid leaking data to our model from the test year set. If we were to randomly choose test and train sets, our data could leak information to the model, making it seemingly more accurate while really taking away from the models accuracy on future test sets. </p>
+
+<p>Ultimately, our goal was to create a high scoring model based on the bracket scoring system.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/MarchMadnessCS109">MarchMadnessCS109</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
