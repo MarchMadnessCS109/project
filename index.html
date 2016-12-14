@@ -34,6 +34,12 @@
 
 <p><a href="#3">3 Final Model and Prediction</a></p>
 
+<p><a href="#4">4 Limitations and Further Research</a></p>
+
+<p><a href="#5">5 Conclusions</a></p>
+
+<p><a href="#6">6 References</a></p>
+
 <h1>
 <a id="0-introduction" class="anchor" href="#0-introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0 Introduction</h1>
 
@@ -101,7 +107,7 @@
 
 <p>Here we tune for the range of upsets. It makes sense that if this range is too large (i.e. there if a large difference in probabilities of winning between the two teams) our model will be inaccurate because it will predict winning teams to lose. Thus, we want to optimize this range. We found that a range from .46 to .54 is the most likely to have upsets. Thus, when the team predicted to win has a .54 or less chance at winning, our model predicts them to lose. Again, we want to make our model the most different from that of the seed model and this is why we predict the higher seed team to win.</p>
 
-<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/probability_range.png" alt="Probability Range"></p>
+<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/probability_range.png?raw=true" alt="Probability Range"></p>
 
 <h1>
 <a id="3-our-final-model-and-prediction" class="anchor" href="#3-our-final-model-and-prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 Our Final Model and Prediction</h1>
@@ -111,11 +117,42 @@
 <h2>
 <a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results</h2>
 
-<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/model_scoring.png" alt="Final Model"></p>
+<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/seed_logistic.png?raw=true" alt="Final Model"></p>
 
 <p>Above are the results from our fully tuned model. When we compare our model to the baseline, seed only model, we see that the number of games predicted correctly is about the same as the seed model. However, it is important to note that our model is much better at predicting later games. We can see that in 6 out of the 10 test years, we beat the seeded model by points scored. Though the model does not guarantee a win every year, the fact that it accounts for deviation from the seed model results in a model that will give the user a higher possibility of winning in their bracket tournament. </p>
 
 <p>Because building a March Madness bracket is more than simply guessing games correctly, we feel as though we have built a model that will allow users to potentially win their brackets and differentiate from the seed model, which is most important. The ability to score well is extremely important in these competition, and we can see that our model is very good at predicting later games in the tournament. Our model is built to score points, not games. </p>
+
+<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/model_scoring.png?raw=true" alt="Final Model"></p>
+
+<p>Above we can see our models scored alone. Note that we included a function to give our model additional points if it varied more from the seed model because we value brackets with individuality. </p>
+
+<h1>
+<a id="4-limitations-and-further-research" class="anchor" href="#4-limitations-and-further-research" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4 Limitations and Further Research</h1>
+
+<p><a id="4"></a></p>
+
+<p>Currently, in order to optimize for variability from the seed model, if the probability of one team winning over another is between .46 and .54, the model chooses the underdog of the game to win. In order to maximize the weighted score of the bracket, a greedy function might be implemented where the model looks at all possible bracket outcomes and trains the model based on the bracket with the most possible points.</p>
+
+<p>Another limitation of the model is that it doesn't account for anything happening in the tournament itself. For instance, if a high seed team upsets an expected winner, that could give the underdog a higher chance of winning their next game, impacting the model. One way to change the model to make it more accurate might be to give teams statistics for what happens when the tournament starts. </p>
+
+<h1>
+<a id="5-conclusions" class="anchor" href="#5-conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5 Conclusions</h1>
+
+<p><a id="5"></a></p>
+
+<p>Overall, we can see that our model does give a high scoring bracket for some years. In a March Madness bracket tournament, it is important to remember that optimizing for the scoring model is more important than optimizing for the accuracy of games. In other words, the ability to predict later games is more important. Given the near impossibility of predicting a perfect bracket, we feel as though our model does optimize for the weighted scoring bracket of the tournament. While it may not produce a win every year, it does give the user a good chance of winning their overall bracket in some years by optimizing for the scoring model. </p>
+
+<h1>
+<a id="6-references" class="anchor" href="#6-references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6 References</h1>
+
+<p><a id="6"></a></p>
+
+<p>Ezekowitz, J. (2011, May 18). Quantifying Intangibles: A New Way to Predict the NCAA Tournament. Retrieved December 09, 2016, from <a href="https://harvardsportsanalysis.wordpress.com/2011/05/18/quantifying-intangibles-a-network-analysis-prediction-model-for-the-ncaa-tournament/">https://harvardsportsanalysis.wordpress.com/2011/05/18/quantifying-intangibles-a-network-analysis-prediction-model-for-the-ncaa-tournament/</a></p>
+
+<p>What the hell is Elo, anyway? (2012, October 21). Retrieved December 09, 2016, from <a href="http://sportselo.blogspot.com/2012/10/wht-hell-is-elo-anyway.html">http://sportselo.blogspot.com/2012/10/wht-hell-is-elo-anyway.html</a></p>
+
+<p>March Machine Learning Mania 2016 (2016, February 11). Retrieved December 14, 2016, from <a href="https://www.kaggle.com/c/march-machine-learning-mania-2016/data">https://www.kaggle.com/c/march-machine-learning-mania-2016/data</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/MarchMadnessCS109/project">Data Driven March Madness: The Search for the Perfect Bracket</a> is maintained by <a href="https://github.com/MarchMadnessCS109">MarchMadnessCS109</a>.</span>
