@@ -1,34 +1,25 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Data Driven March Madness: The Search for the Perfect Bracket by MarchMadnessCS109</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Data Driven March Madness: The Search for the Perfect Bracket</h1>
-        <p>Isabel Lee and Christina Tenuta</p>
+    <section class="page-header">
+      <h1 class="project-name">Data Driven March Madness: The Search for the Perfect Bracket</h1>
+      <h2 class="project-tagline">Isabel Lee and Christina Tenuta</h2>
+      <a href="https://github.com/MarchMadnessCS109/project" class="btn">View on GitHub</a>
+      <a href="https://github.com/MarchMadnessCS109/project/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/MarchMadnessCS109/project/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <p class="view"><a href="https://github.com/MarchMadnessCS109/project">View the Project on GitHub <small>MarchMadnessCS109/project</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/MarchMadnessCS109/project/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/MarchMadnessCS109/project/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/MarchMadnessCS109/project">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h2>
+    <section class="main-content">
+      <h2>
 <a id="notebook-contents" class="anchor" href="#notebook-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notebook Contents</h2>
 
 <p><a href="#0">0 Introduction</a></p>
@@ -104,13 +95,36 @@
 <p>Lastly, our choice to train the model using 3 years before the test year is driven by two suppositions. The first is that the game changes over the years. Teams might score more points, foul less, etc. over the course of history. To account for these changing aspects of the game, we used 3 years before the test year to train our model. Secondly, we use 3 years before the test year to avoid leaking data to our model from the test year set. If we were to randomly choose test and train sets, our data could leak information to the model, making it seemingly more accurate while really taking away from the models accuracy on future test sets. </p>
 
 <p>Ultimately, our goal was to create a high scoring model based on the bracket scoring system.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/MarchMadnessCS109">MarchMadnessCS109</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+<h3>
+<a id="an-example-of-some-of-the-tuning-we-did-the-upset-range" class="anchor" href="#an-example-of-some-of-the-tuning-we-did-the-upset-range" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>An example of some of the tuning we did: The upset range</h3>
+
+<p>Here we tune for the range of upsets. It makes sense that if this range is too large (i.e. there if a large difference in probabilities of winning between the two teams) our model will be inaccurate because it will predict winning teams to lose. Thus, we want to optimize this range. We found that a range from .46 to .54 is the most likely to have upsets. Thus, when the team predicted to win has a .54 or less chance at winning, our model predicts them to lose. Again, we want to make our model the most different from that of the seed model and this is why we predict the higher seed team to win.</p>
+
+<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/probability_range.png" alt="Probability Range"></p>
+
+<h1>
+<a id="3-our-final-model-and-prediction" class="anchor" href="#3-our-final-model-and-prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 Our Final Model and Prediction</h1>
+
+<p><a id="3"></a></p>
+
+<h2>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results</h2>
+
+<p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/model_scoring.png" alt="Final Model"></p>
+
+<p>Above are the results from our fully tuned model. When we compare our model to the baseline, seed only model, we see that the number of games predicted correctly is about the same as the seed model. However, it is important to note that our model is much better at predicting later games. We can see that in 6 out of the 10 test years, we beat the seeded model by points scored. Though the model does not guarantee a win every year, the fact that it accounts for deviation from the seed model results in a model that will give the user a higher possibility of winning in their bracket tournament. </p>
+
+<p>Because building a March Madness bracket is more than simply guessing games correctly, we feel as though we have built a model that will allow users to potentially win their brackets and differentiate from the seed model, which is most important. The ability to score well is extremely important in these competition, and we can see that our model is very good at predicting later games in the tournament. Our model is built to score points, not games. </p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/MarchMadnessCS109/project">Data Driven March Madness: The Search for the Perfect Bracket</a> is maintained by <a href="https://github.com/MarchMadnessCS109">MarchMadnessCS109</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+    </section>
+
+  
   </body>
 </html>
