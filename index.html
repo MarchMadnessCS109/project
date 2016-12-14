@@ -24,21 +24,19 @@
 
 <p><a href="#0">0 Introduction</a></p>
 
-<p><a href="#1">1 Data Exploration</a></p>
-
-<p><a href="#2">2 Building the Model</a></p>
+<p><a href="#1">1 Building the Model</a></p>
 
 <ul>
-<li><a href="#2.1">2.1 Methodology</a></li>
+<li><a href="#1.1">1.1 Methodology</a></li>
 </ul>
 
-<p><a href="#3">3 Final Model and Prediction</a></p>
+<p><a href="#2">2 Final Model and Prediction</a></p>
 
-<p><a href="#4">4 Limitations and Further Research</a></p>
+<p><a href="#3">3 Limitations and Further Research</a></p>
 
-<p><a href="#5">5 Conclusions</a></p>
+<p><a href="#4">4 Conclusions</a></p>
 
-<p><a href="#6">6 References</a></p>
+<p><a href="#5">5 References</a></p>
 
 <h1>
 <a id="0-introduction" class="anchor" href="#0-introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>0 Introduction</h1>
@@ -71,9 +69,9 @@
 </ul>
 
 <h1>
-<a id="2-building-the-model" class="anchor" href="#2-building-the-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 Building the Model</h1>
+<a id="1-building-the-model" class="anchor" href="#1-building-the-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1 Building the Model</h1>
 
-<p><a id="2"></a></p>
+<p><a id="1"></a></p>
 
 <p>In order to build the model, we first built the functions that we would need in order to complete all of the steps of our process. The steps are as follows:</p>
 
@@ -90,9 +88,9 @@
 <p>More detail about each of these steps is included as they are performed.</p>
 
 <h2>
-<a id="21-methodology" class="anchor" href="#21-methodology" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2.1 Methodology</h2>
+<a id="11-methodology" class="anchor" href="#11-methodology" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1.1 Methodology</h2>
 
-<p><a id="2.1"></a></p>
+<p><a id="1.1"></a></p>
 
 <p>In this segment, we will explain the methodology behind our model, which is extremely important in building a model. First, I will address our strategy for winning a bracket tournament. This strategy is based on the idea that thousands of people compete in March Madness brackets every year. In order to win these winner-take-all style tournaments, it is important that a bracket not only score the highest, but is also the most different. Thus, our choice to tune the upset range of our model and then choose the underdog to win in this range is driven by the fact that we would like our model to be most different from the other brackets. Likewise, we include a function to account for the variance of our model from the seed model in the weighted score. In other words, brackets that are more different from the seed model earn more points because they are different. </p>
 
@@ -110,9 +108,9 @@
 <p><img src="https://github.com/MarchMadnessCS109/project/blob/master/images/probability_range.png?raw=true" alt="Probability Range"></p>
 
 <h1>
-<a id="3-our-final-model-and-prediction" class="anchor" href="#3-our-final-model-and-prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 Our Final Model and Prediction</h1>
+<a id="2-our-final-model-and-prediction" class="anchor" href="#2-our-final-model-and-prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2 Our Final Model and Prediction</h1>
 
-<p><a id="3"></a></p>
+<p><a id="2"></a></p>
 
 <h2>
 <a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results</h2>
@@ -128,25 +126,25 @@
 <p>Above we can see our models scored alone. Note that we included a function to give our model additional points if it varied more from the seed model because we value brackets with individuality. </p>
 
 <h1>
-<a id="4-limitations-and-further-research" class="anchor" href="#4-limitations-and-further-research" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4 Limitations and Further Research</h1>
+<a id="3-limitations-and-further-research" class="anchor" href="#3-limitations-and-further-research" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3 Limitations and Further Research</h1>
 
-<p><a id="4"></a></p>
+<p><a id="3"></a></p>
 
 <p>Currently, in order to optimize for variability from the seed model, if the probability of one team winning over another is between .46 and .54, the model chooses the underdog of the game to win. In order to maximize the weighted score of the bracket, a greedy function might be implemented where the model looks at all possible bracket outcomes and trains the model based on the bracket with the most possible points.</p>
 
 <p>Another limitation of the model is that it doesn't account for anything happening in the tournament itself. For instance, if a high seed team upsets an expected winner, that could give the underdog a higher chance of winning their next game, impacting the model. One way to change the model to make it more accurate might be to give teams statistics for what happens when the tournament starts. </p>
 
 <h1>
-<a id="5-conclusions" class="anchor" href="#5-conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5 Conclusions</h1>
+<a id="4-conclusions" class="anchor" href="#4-conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4 Conclusions</h1>
 
-<p><a id="5"></a></p>
+<p><a id="4"></a></p>
 
 <p>Overall, we can see that our model does give a high scoring bracket for some years. In a March Madness bracket tournament, it is important to remember that optimizing for the scoring model is more important than optimizing for the accuracy of games. In other words, the ability to predict later games is more important. Given the near impossibility of predicting a perfect bracket, we feel as though our model does optimize for the weighted scoring bracket of the tournament. While it may not produce a win every year, it does give the user a good chance of winning their overall bracket in some years by optimizing for the scoring model. </p>
 
 <h1>
-<a id="6-references" class="anchor" href="#6-references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6 References</h1>
+<a id="5-references" class="anchor" href="#5-references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>5 References</h1>
 
-<p><a id="6"></a></p>
+<p><a id="5"></a></p>
 
 <p>Ezekowitz, J. (2011, May 18). Quantifying Intangibles: A New Way to Predict the NCAA Tournament. Retrieved December 09, 2016, from <a href="https://harvardsportsanalysis.wordpress.com/2011/05/18/quantifying-intangibles-a-network-analysis-prediction-model-for-the-ncaa-tournament/">https://harvardsportsanalysis.wordpress.com/2011/05/18/quantifying-intangibles-a-network-analysis-prediction-model-for-the-ncaa-tournament/</a></p>
 
